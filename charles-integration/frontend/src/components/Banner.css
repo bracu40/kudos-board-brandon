@@ -1,0 +1,17 @@
+.banner {
+  padding: 56px 24px;
+  background: var(--accent-bg);
+  border-bottom: 1px solid var(--border);
+}
+
+.banner__title {
+  font-size: 40px;
+  margin: 0 0 12px;
+  letter-spacing: -1px;
+}
+
+.banner__subtitle {
+  max-width: 520px;
+  margin: 0 auto;
+  font-size: 18px;
+}

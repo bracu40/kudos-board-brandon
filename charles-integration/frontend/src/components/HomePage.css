@@ -1,0 +1,15 @@
+.home {
+  display: flex;
+  flex-direction: column;
+  min-height: 100svh;
+}
+
+.home__content {
+  flex: 1;
+  padding: 48px 24px;
+}
+
+.home__placeholder {
+  color: var(--text);
+  font-style: italic;
+}

@@ -21,11 +21,11 @@
 ### Phase 1: Standalone Discovery UI (Days 1-4)
 
 #### Day 1 (Wednesday) — Frontend Layout
-- [ ] `cd frontend && npx create-react-app .` (port 3002)
-- [ ] Build `Header.jsx` — site title/logo
-- [ ] Build `Banner.jsx` — welcome message or hero section
-- [ ] Build `Footer.jsx` — footer content
-- [ ] Build `HomePage.jsx` — combines Header + Banner + (placeholder) + Footer
+- [x] `cd frontend` — scaffolded with Vite + React (port 3002; CRA is deprecated and broken on Node 24)
+- [x] Build `Header.jsx` — site title/logo
+- [x] Build `Banner.jsx` — welcome message or hero section
+- [x] Build `Footer.jsx` — footer content
+- [x] Build `HomePage.jsx` — combines Header + Banner + (placeholder) + Footer
 
 #### Day 2 (Thursday) — Search Bar
 - [ ] Build `SearchBar.jsx`:
