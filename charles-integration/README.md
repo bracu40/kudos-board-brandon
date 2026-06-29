@@ -58,12 +58,12 @@
 ### Phase 2: Integration (Days 5-7)
 
 #### Day 5 (Sunday) — Backend Integration
-- [ ] ⏳ **BLOCKED**: Prateek and Brandon haven't pushed their code yet (folders still README-only). Backend built from the planning.md contract instead; reconcile against their code on Day 7.
+- [x] Backend originally built from the planning.md contract (partners hadn't pushed yet); now reconciled against their pushed code — see planning.md.
 - [x] Create `charles-integration/backend/`
 - [x] `npm init -y && npm install express cors @prisma/client pg` (Prisma pinned to v6 — see backend/README.md)
 - [x] `npx prisma init` (schema + .env created)
-- [~] Copy Prateek's 3 board routes into `index.js` — implemented from spec (GET/POST/DELETE /boards); copy-verify when pushed
-- [~] Copy Brandon's 4 card routes into same `index.js` — implemented from spec; copy-verify when pushed
+- [x] Board routes in `index.js` (GET/POST/DELETE /boards) — ✅ contracts match Prateek's pushed code
+- [x] Card routes in same `index.js` — ✅ contracts match Brandon's pushed code
 - [x] Merge `schema.prisma`:
   ```prisma
   model Board {
@@ -88,9 +88,9 @@
   }
   ```
 - [x] **Update GET /cards → GET /boards/:boardId/cards** (filter by boardId; also 404s if board missing)
-- [x] Create `.env` with `DATABASE_URL=postgresql://user:password@localhost:5432/kudos_full`
-- [ ] ⏳ Run `npx prisma migrate dev --name init` — BLOCKED: placeholder `user:password` creds are denied; needs real DB credentials. Schema validates ✅ and client generates ✅.
-- [~] Test all 7 endpoints — server boots ✅, all routes wired ✅, validation (400) and DB-error (500) paths verified via curl ✅; full CRUD pending a live DB.
+- [x] Create `.env` with a working `DATABASE_URL` for the `kudos_full` database (gitignored; local `postgres` role)
+- [x] Run `npx prisma migrate dev --name init` — ✅ applied, DB in sync with schema
+- [x] Test all 7 endpoints — ✅ all pass live via curl: create/list boards, create/list cards, upvote (repeatable), delete card, **cascade delete board removes its cards**, plus 400/404 error cases
 
 #### Day 6 (Monday) — Frontend Integration
 - [x] Use existing Phase 1 React app at `charles-integration/frontend/`
@@ -117,14 +117,14 @@
   - Create card: `POST /cards` (boardId from URL) ✅
   - Upvote card: `PATCH /cards/:id/upvote` ✅
   - Delete card: `DELETE /cards/:id` ✅
-- [~] Test end-to-end flow — code complete & wired; full run needs a live `kudos_full` DB (creds blocked, see Day 5). Verified: build ✅, lint ✅, 9 unit tests ✅, both routes serve 200, UI handles backend errors gracefully. GIPHY uses `VITE_GIPHY_API_KEY`.
+- [x] Test end-to-end flow — ✅ full stack runs live against `kudos_full`: backend serves real boards/cards, frontend loads them (build ✅, lint ✅, 9 unit tests ✅, both routes serve 200, UI handles errors gracefully). GIPHY uses `VITE_GIPHY_API_KEY`.
 
 #### Day 7 (Tuesday) — Reconciliation & Polish
 - [x] Open `planning.md`
 - [x] Add **Spec Reconciliation — Backend** section (7 endpoints, both schemas, 3 gaps resolved)
 - [x] Add **Final Spec Reconciliation — Full Pipeline** section (fetch calls, gaps, state arch, final assessment)
 - [x] Commit reconciliation sections
-- [~] Final testing with Prateek and Brandon — static checks pass (build/lint/tests/routes); live end-to-end pending a `kudos_full` DB (creds blocked)
+- [x] Final testing — ✅ all 7 endpoints pass live against a real `kudos_full` DB (incl. cascade delete + 400/404 cases); frontend loads live data end-to-end
 
 ## Components You Own
 

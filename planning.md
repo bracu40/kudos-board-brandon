@@ -223,8 +223,7 @@ Verified `charles-integration/frontend` against the partners' pushed frontends.
 ### Final code-spec parity assessment:
 - Is planning.md accurate? ✅ Yes. Backend routes, response shapes, schema, and frontend
   fetch contracts all match across the three workspaces.
-- ⚠️ Outstanding (environmental, not code): full end-to-end run requires a live `kudos_full`
-  Postgres database. The placeholder `user:password` credentials in `.env` are denied, so
-  `prisma migrate dev` and a live CRUD walkthrough have not been executed. All static checks
-  pass: schema validates, frontend builds + lints, 9 unit tests pass, both routes serve, and
-  the UI degrades gracefully on backend errors.
+- ✅ End-to-end verified live: `kudos_full` migrated, all 7 endpoints exercised via curl
+  (create/list boards + cards, repeatable upvote, delete card, cascade delete board, and
+  400/404 error cases), and the frontend loads live board data from the integrated backend.
+  Static checks also pass: schema validates, frontend builds + lints, 9 unit tests pass.
