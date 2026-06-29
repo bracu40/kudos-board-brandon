@@ -13,3 +13,22 @@
   color: var(--text);
   font-style: italic;
 }
+
+.home__board-list {
+  list-style: none;
+  padding: 0;
+  margin: 32px auto 0;
+  max-width: 520px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.home__board-item {
+  padding: 16px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg);
+  color: var(--text-h);
+  box-shadow: var(--shadow);
+}

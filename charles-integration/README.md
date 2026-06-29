@@ -28,15 +28,15 @@
 - [x] Build `HomePage.jsx` — combines Header + Banner + (placeholder) + Footer
 
 #### Day 2 (Thursday) — Search Bar
-- [ ] Build `SearchBar.jsx`:
+- [x] Build `SearchBar.jsx`:
   - Text input field
   - Submit/Search button
   - Clear button (X icon or "Clear" text)
-- [ ] Search logic:
+- [x] Search logic:
   - When Enter key or Submit clicked → filter boards where `title.toLowerCase().includes(query.toLowerCase())`
   - When input is cleared (empty string) → show all boards
-- [ ] Use **mock board data** (hardcoded array)
-- [ ] Test: search "thank" → only boards with "thank" in title
+- [x] Use **mock board data** (hardcoded array)
+- [x] Test: search "thank" → only boards with "thank" in title
 
 #### Day 3 (Friday) — Category Filter
 - [ ] Build `FilterButtons.jsx` (button group or dropdown):

@@ -1,0 +1,60 @@
+// Mock board data for Phase 1 (standalone discovery UI).
+// Replaced with real `GET /boards` fetch calls in Phase 2 integration.
+export const mockBoards = [
+  {
+    id: 1,
+    title: 'Thank You, Support Team',
+    category: 'thank you',
+    author: 'Maya',
+    imageUrl: 'https://picsum.photos/seed/board1/400/250',
+    createdAt: '2026-06-20T10:00:00Z',
+  },
+  {
+    id: 2,
+    title: 'Launch Day Celebration',
+    category: 'celebration',
+    author: 'Devon',
+    imageUrl: 'https://picsum.photos/seed/board2/400/250',
+    createdAt: '2026-06-25T14:30:00Z',
+  },
+  {
+    id: 3,
+    title: 'Daily Inspiration',
+    category: 'inspiration',
+    author: 'Priya',
+    imageUrl: 'https://picsum.photos/seed/board3/400/250',
+    createdAt: '2026-06-28T09:15:00Z',
+  },
+  {
+    id: 4,
+    title: 'Thank You Volunteers',
+    category: 'thank you',
+    author: 'Sam',
+    imageUrl: 'https://picsum.photos/seed/board4/400/250',
+    createdAt: '2026-06-18T16:45:00Z',
+  },
+  {
+    id: 5,
+    title: 'Team Anniversary Celebration',
+    category: 'celebration',
+    author: 'Lena',
+    imageUrl: 'https://picsum.photos/seed/board5/400/250',
+    createdAt: '2026-06-26T11:20:00Z',
+  },
+  {
+    id: 6,
+    title: 'Words of Encouragement',
+    category: 'inspiration',
+    author: 'Theo',
+    imageUrl: 'https://picsum.photos/seed/board6/400/250',
+    createdAt: '2026-06-22T08:00:00Z',
+  },
+  {
+    id: 7,
+    title: 'Birthday Celebration Wall',
+    category: 'celebration',
+    author: 'Nina',
+    imageUrl: 'https://picsum.photos/seed/board7/400/250',
+    createdAt: '2026-06-29T13:00:00Z',
+  },
+]
