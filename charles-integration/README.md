@@ -49,9 +49,9 @@
 - [x] Test all filters work
 
 #### Day 4 (Saturday) — Polish Discovery UI
-- [ ] Combine search + filter (both work together)
-- [ ] Test all interactions with mock data
-- [ ] ✅ **Phase 1 DONE**
+- [x] Combine search + filter (both work together)
+- [x] Test all interactions with mock data (Vitest suite: `npm test`, 9 tests)
+- [x] ✅ **Phase 1 DONE**
 
 ---
 

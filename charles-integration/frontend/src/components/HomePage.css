@@ -14,6 +14,12 @@
   font-style: italic;
 }
 
+.home__count {
+  margin: 24px auto 0;
+  font-size: 14px;
+  color: var(--text);
+}
+
 .home__board-list {
   list-style: none;
   padding: 0;
