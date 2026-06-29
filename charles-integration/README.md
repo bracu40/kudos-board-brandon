@@ -192,15 +192,16 @@ const filteredBoards = useMemo(() => {
 # Terminal 1 - Backend
 cd charles-integration/backend
 npm install
+# Set a real DATABASE_URL in .env (see .env.example), then:
 npx prisma migrate dev
-node index.js
+npm start          # or: node index.js
 # Backend runs on http://localhost:5000
 
 # Terminal 2 - Frontend
 cd charles-integration/frontend
 npm install
-npm start
-# Frontend runs on http://localhost:3000
+npm run dev        # Vite (not `npm start`)
+# Frontend runs on http://localhost:3002
 ```
 
 ## Reconciliation Template
