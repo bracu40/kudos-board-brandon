@@ -177,9 +177,10 @@
 ## Filter Logic (Important!)
 
 ### Recent Filter
-Sort boards by `createdAt` descending, take first 6:
+Sort boards by `createdAt` descending, take first 6. Copy first (`[...boards]`)
+so we don't mutate the source array — `.sort()` sorts in place:
 ```javascript
-const recentBoards = boards
+const recentBoards = [...boards]
   .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
   .slice(0, 6);
 ```
@@ -198,7 +199,8 @@ const filteredBoards = useMemo(() => {
   
   // Apply category filter
   if (selectedCategory === 'recent') {
-    result = result
+    // Copy first so we don't mutate state — .sort() sorts in place.
+    result = [...result]
       .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
       .slice(0, 6);
   } else if (selectedCategory !== 'all') {
