@@ -93,47 +93,31 @@
 - [~] Test all 7 endpoints — server boots ✅, all routes wired ✅, validation (400) and DB-error (500) paths verified via curl ✅; full CRUD pending a live DB.
 
 #### Day 6 (Monday) — Frontend Integration
-- [ ] Create `charles-integration/frontend/` (can copy your existing React app)
-- [ ] Install React Router: `npm install react-router-dom`
-- [ ] Copy components:
-  - From Prateek: `BoardGrid.jsx`, `BoardTile.jsx`, `CreateBoardForm.jsx`
-  - From Brandon: `CardGrid.jsx`, `CardTile.jsx`, `CreateCardForm.jsx`
-  - Your own: `Header.jsx`, `Banner.jsx`, `Footer.jsx`, `SearchBar.jsx`, `FilterButtons.jsx`
-- [ ] Create `HomePage.jsx`:
+- [x] Use existing Phase 1 React app at `charles-integration/frontend/`
+- [x] Install React Router: `npm install react-router-dom`
+- [~] Copy components:
+  - From Prateek: `BoardGrid.jsx`, `BoardTile.jsx`, `CreateBoardForm.jsx` — built from spec (not pushed); copy-verify on Day 7
+  - From Brandon: `CardGrid.jsx`, `CardTile.jsx`, `CreateCardForm.jsx` (with GIPHY) — built from spec; copy-verify on Day 7
+  - Your own: `Header.jsx`, `Banner.jsx`, `Footer.jsx`, `SearchBar.jsx`, `FilterButtons.jsx` ✅
+- [x] Create `HomePage.jsx`:
   - Renders: Header + Banner + SearchBar + FilterButtons + CreateBoardForm + BoardGrid + Footer
   - State: boards, searchQuery, selectedCategory, filteredBoards (computed)
   - Fetch: `GET http://localhost:5000/boards` on mount
   - BoardTile onClick → `navigate(`/boards/${board.id}`)`
-- [ ] Create `BoardPage.jsx`:
+- [x] Create `BoardPage.jsx`:
   - Renders: Header + board title + CreateCardForm + CardGrid + Footer
   - State: boardId (from URL), cards, isLoading
   - Fetch: `GET http://localhost:5000/boards/${boardId}/cards` on mount
-- [ ] Set up routing in `App.jsx`:
-  ```jsx
-  <Routes>
-    <Route path="/" element={<HomePage />} />
-    <Route path="/boards/:id" element={<BoardPage />} />
-  </Routes>
-  ```
-- [ ] Replace ALL mock data with real fetch calls:
-  - Home page: `fetch('http://localhost:5000/boards')`
-  - Create board: `POST /boards`
-  - Delete board: `DELETE /boards/:id`
-  - Board page: `fetch('http://localhost:5000/boards/${boardId}/cards')`
-  - Create card: `POST /cards` (include boardId from URL)
-  - Upvote card: `PATCH /cards/:id/upvote`
-  - Delete card: `DELETE /cards/:id`
-- [ ] Test end-to-end flow:
-  1. Home page loads all boards
-  2. Search by title works
-  3. Filter by category works (All, Recent, Celebration, etc.)
-  4. Create new board → appears in grid
-  5. Click board → navigates to `/boards/:id`
-  6. Board page shows cards for that board
-  7. Create card with GIPHY → appears in grid
-  8. Upvote card → count increases
-  9. Delete card → disappears
-  10. Go back to home → delete board → disappears
+- [x] Set up routing in `App.jsx` (HomePage at `/`, BoardPage at `/boards/:id`)
+- [x] Replace ALL mock data with real fetch calls (centralized in `src/api.js`):
+  - Home page: `GET /boards` ✅
+  - Create board: `POST /boards` ✅
+  - Delete board: `DELETE /boards/:id` ✅
+  - Board page: `GET /boards/:boardId/cards` ✅
+  - Create card: `POST /cards` (boardId from URL) ✅
+  - Upvote card: `PATCH /cards/:id/upvote` ✅
+  - Delete card: `DELETE /cards/:id` ✅
+- [~] Test end-to-end flow — code complete & wired; full run needs a live `kudos_full` DB (creds blocked, see Day 5). Verified: build ✅, lint ✅, 9 unit tests ✅, both routes serve 200, UI handles backend errors gracefully. GIPHY uses `VITE_GIPHY_API_KEY` (public beta key fallback).
 
 #### Day 7 (Tuesday) — Reconciliation & Polish
 - [ ] Open `planning.md`

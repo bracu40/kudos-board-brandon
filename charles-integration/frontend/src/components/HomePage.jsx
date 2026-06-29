@@ -1,23 +1,63 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import Header from './Header'
 import Banner from './Banner'
 import Footer from './Footer'
 import SearchBar from './SearchBar'
 import FilterButtons from './FilterButtons'
+import CreateBoardForm from './CreateBoardForm'
+import BoardGrid from './BoardGrid'
 import { filterBoards } from '../utils/filterBoards'
-import { mockBoards } from '../data/mockBoards'
+import { getBoards, deleteBoard } from '../api'
 import './HomePage.css'
 
 function HomePage() {
-  // Phase 1 uses mock data; Phase 2 replaces this with a GET /boards fetch.
-  const [boards] = useState(mockBoards)
+  const navigate = useNavigate()
+  const [boards, setBoards] = useState([])
   const [searchQuery, setSearchQuery] = useState('')
   const [selectedCategory, setSelectedCategory] = useState('all')
+  const [isLoading, setIsLoading] = useState(true)
+  const [error, setError] = useState(null)
+  const [deletingId, setDeletingId] = useState(null)
+
+  // Fetch all boards on mount.
+  useEffect(() => {
+    let active = true
+    getBoards()
+      .then(({ boards }) => {
+        if (active) setBoards(boards)
+      })
+      .catch((err) => {
+        if (active) setError(err.message)
+      })
+      .finally(() => {
+        if (active) setIsLoading(false)
+      })
+    return () => {
+      active = false
+    }
+  }, [])
 
   const filteredBoards = useMemo(
     () => filterBoards(boards, searchQuery, selectedCategory),
     [boards, searchQuery, selectedCategory],
   )
+
+  function handleBoardCreated(board) {
+    setBoards((prev) => [board, ...prev])
+  }
+
+  async function handleBoardDeleted(id) {
+    setDeletingId(id)
+    try {
+      await deleteBoard(id)
+      setBoards((prev) => prev.filter((b) => b.id !== id))
+    } catch (err) {
+      setError(err.message)
+    } finally {
+      setDeletingId(null)
+    }
+  }
 
   return (
     <div className="home">
@@ -33,25 +73,25 @@ function HomePage() {
           selectedCategory={selectedCategory}
           onFilterChange={setSelectedCategory}
         />
+        <CreateBoardForm onBoardCreated={handleBoardCreated} />
 
-        {/* BoardGrid lands here in Phase 2.
-            Simple list for now so search + filter are visibly testable. */}
-        {filteredBoards.length > 0 ? (
+        {isLoading ? (
+          <p className="home__placeholder">Loading boards…</p>
+        ) : error ? (
+          <p className="home__error">{error}</p>
+        ) : (
           <>
             <p className="home__count">
               {filteredBoards.length}{' '}
               {filteredBoards.length === 1 ? 'board' : 'boards'}
             </p>
-            <ul className="home__board-list">
-              {filteredBoards.map((board) => (
-                <li key={board.id} className="home__board-item">
-                  {board.title}
-                </li>
-              ))}
-            </ul>
+            <BoardGrid
+              boards={filteredBoards}
+              onBoardDeleted={handleBoardDeleted}
+              onBoardOpen={(id) => navigate(`/boards/${id}`)}
+              deletingId={deletingId}
+            />
           </>
-        ) : (
-          <p className="home__placeholder">No boards match your search and filter.</p>
         )}
       </main>
       <Footer />

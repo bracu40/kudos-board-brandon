@@ -5,7 +5,7 @@ const FILTERS = [
   { value: 'all', label: 'All' },
   { value: 'recent', label: 'Recent' },
   { value: 'celebration', label: 'Celebration' },
-  { value: 'thank you', label: 'Thank You' },
+  { value: 'thank-you', label: 'Thank You' },
   { value: 'inspiration', label: 'Inspiration' },
 ]
 

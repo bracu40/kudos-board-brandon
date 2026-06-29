@@ -4,7 +4,7 @@ export const mockBoards = [
   {
     id: 1,
     title: 'Thank You, Support Team',
-    category: 'thank you',
+    category: 'thank-you',
     author: 'Maya',
     imageUrl: 'https://picsum.photos/seed/board1/400/250',
     createdAt: '2026-06-20T10:00:00Z',
@@ -28,7 +28,7 @@ export const mockBoards = [
   {
     id: 4,
     title: 'Thank You Volunteers',
-    category: 'thank you',
+    category: 'thank-you',
     author: 'Sam',
     imageUrl: 'https://picsum.photos/seed/board4/400/250',
     createdAt: '2026-06-18T16:45:00Z',

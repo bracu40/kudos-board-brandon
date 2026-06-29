@@ -32,7 +32,7 @@ describe('filterBoards', () => {
 
     it('filters by exact category', () => {
       expect(filterBoards(mockBoards, '', 'celebration')).toHaveLength(3)
-      expect(filterBoards(mockBoards, '', 'thank you')).toHaveLength(2)
+      expect(filterBoards(mockBoards, '', 'thank-you')).toHaveLength(2)
       expect(filterBoards(mockBoards, '', 'inspiration')).toHaveLength(2)
     })
   })
@@ -60,7 +60,7 @@ describe('filterBoards', () => {
 
   describe('combined search + filter', () => {
     it('applies both: search narrows, then category filters', () => {
-      // "thank" titles are all category "thank you", so celebration yields none.
+      // "thank" titles are all category "thank-you", so celebration yields none.
       expect(filterBoards(mockBoards, 'thank', 'celebration')).toEqual([])
       // "celebration" title search + celebration category overlap.
       const both = filterBoards(mockBoards, 'celebration', 'celebration')
