@@ -102,7 +102,7 @@
 - [x] Create `HomePage.jsx`:
   - Renders: Header + Banner + SearchBar + FilterButtons + CreateBoardForm + BoardGrid + Footer
   - State: boards, searchQuery, selectedCategory, filteredBoards (computed)
-  - Fetch: `GET http://localhost:5000/boards` on mount
+  - Fetch: `GET httplocalhost:5000/boards` on mount
   - BoardTile onClick → `navigate(`/boards/${board.id}`)`
 - [x] Create `BoardPage.jsx`:
   - Renders: Header + board title + CreateCardForm + CardGrid + Footer

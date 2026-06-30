@@ -42,3 +42,26 @@ export const createCard = (data) =>
 export const upvoteCard = (id) =>
   request(`/cards/${id}/upvote`, { method: 'PATCH' })
 export const deleteCard = (id) => request(`/cards/${id}`, { method: 'DELETE' })
+
+// --- GIPHY ---
+// Search GIPHY and return a normalized list: { id, url, previewUrl, title }.
+//   url        → full-size gif (stored as the card's gifUrl)
+//   previewUrl → smaller gif for the results grid
+export async function searchGifs(query) {
+  const params = new URLSearchParams({
+    api_key: GIPHY_API_KEY,
+    q: query,
+    limit: '12',
+    rating: 'g',
+  })
+  const res = await fetch(`https://api.giphy.com/v1/gifs/search?${params}`)
+  if (!res.ok) throw new Error(`GIPHY request failed (${res.status})`)
+  const body = await res.json()
+  return (body.data || []).map((g) => ({
+    id: g.id,
+    url: g.images?.original?.url || g.images?.fixed_height?.url || '',
+    previewUrl:
+      g.images?.fixed_height_small?.url || g.images?.fixed_height?.url || '',
+    title: g.title || 'GIF',
+  }))
+}

@@ -1,29 +1,61 @@
-import './BoardTile.css'
+import { Trash2 } from 'lucide-react'
+import { CATEGORY_LABELS, CATEGORY_STYLE } from '../categories'
 
-// Prateek's component (built from spec — his code wasn't pushed at integration).
-// Props: board, onDelete(id), onOpen(id), isDeleting
-function BoardTile({ board, onDelete, onOpen, isDeleting }) {
+function timeAgo(iso) {
+  const days = Math.floor((Date.now() - new Date(iso).getTime()) / 86400000)
+  if (days <= 0) return 'Today'
+  if (days === 1) return 'Yesterday'
+  return `${days} days ago`
+}
+
+// Props: board, onOpen(id), onDelete(id), isDeleting
+function BoardTile({ board, onOpen, onDelete, isDeleting }) {
+  const style = CATEGORY_STYLE[board.category] || { bg: '#7c3aed', text: '#fff' }
+  const label = CATEGORY_LABELS[board.category] || board.category
+
   return (
-    <div className="board-tile" onClick={() => onOpen(board.id)}>
-      <img className="board-tile__image" src={board.imageUrl} alt={board.title} />
-      <div className="board-tile__body">
-        <span className="board-tile__category">{board.category}</span>
-        <h3 className="board-tile__title">{board.title}</h3>
-        {board.author && (
-          <p className="board-tile__author">by {board.author}</p>
+    <div
+      onClick={() => onOpen(board.id)}
+      className="group relative cursor-pointer overflow-hidden rounded-xl border border-border bg-card transition-all duration-200 hover:-translate-y-1 hover:shadow-[0_8px_28px_rgba(124,58,237,0.18)]"
+    >
+      <div className="relative h-40 overflow-hidden bg-secondary">
+        {board.imageUrl && (
+          <img
+            src={board.imageUrl}
+            alt={board.title}
+            className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+          />
         )}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
+        <span
+          className="absolute left-3 top-3 rounded-lg px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider"
+          style={{ background: style.bg, color: style.text }}
+        >
+          {label}
+        </span>
+        <button
+          onClick={(e) => {
+            e.stopPropagation()
+            onDelete(board.id)
+          }}
+          disabled={isDeleting}
+          aria-label="Delete board"
+          className="absolute right-3 top-3 flex h-7 w-7 items-center justify-center rounded-lg bg-black/50 text-white opacity-0 transition-all duration-150 hover:bg-red-500 group-hover:opacity-100 disabled:opacity-60"
+        >
+          <Trash2 size={12} />
+        </button>
       </div>
-      <button
-        type="button"
-        className="board-tile__delete"
-        disabled={isDeleting}
-        onClick={(e) => {
-          e.stopPropagation() // don't trigger navigation
-          onDelete(board.id)
-        }}
-      >
-        {isDeleting ? 'Deleting…' : 'Delete'}
-      </button>
+      <div className="p-4">
+        <h3 className="mb-1.5 text-sm font-semibold leading-snug text-card-foreground">
+          {board.title}
+        </h3>
+        {board.author && (
+          <p className="text-xs text-muted-foreground">by {board.author}</p>
+        )}
+        <p className="mt-0.5 text-xs text-muted-foreground">
+          {timeAgo(board.createdAt)}
+        </p>
+      </div>
     </div>
   )
 }

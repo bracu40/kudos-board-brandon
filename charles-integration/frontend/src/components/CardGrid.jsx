@@ -1,15 +1,19 @@
 import CardTile from './CardTile'
-import './CardGrid.css'
 
-// Brandon's component (built from spec).
 // Props: cards, onCardDeleted(id), onCardUpvoted(id), upvotingId, deletingId
 function CardGrid({ cards, onCardDeleted, onCardUpvoted, upvotingId, deletingId }) {
   if (cards.length === 0) {
-    return <p className="card-grid__empty">No cards yet. Add the first one!</p>
+    return (
+      <div className="flex flex-col items-center justify-center gap-3 py-20 text-center">
+        <p className="max-w-xs text-sm text-muted-foreground">
+          No cards yet. Add one using the form.
+        </p>
+      </div>
+    )
   }
 
   return (
-    <div className="card-grid">
+    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
       {cards.map((card) => (
         <CardTile
           key={card.id}

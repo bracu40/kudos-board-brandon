@@ -1,11 +1,10 @@
-import './Footer.css'
-
 function Footer() {
   return (
-    <footer className="footer">
-      <p className="footer__text">
-        Kudos Board &middot; Built with React &middot; {new Date().getFullYear()}
-      </p>
+    <footer className="mt-auto border-t border-border">
+      <div className="mx-auto flex max-w-[1126px] flex-col items-center justify-between gap-2 px-6 py-5 sm:flex-row">
+        <p className="text-sm text-muted-foreground">Kudos Board</p>
+        <p className="text-xs text-muted-foreground">GIFs powered by GIPHY</p>
+      </div>
     </footer>
   )
 }
