@@ -8,6 +8,8 @@
 //   - Brandon's `GET /cards` becomes `GET /boards/:boardId/cards` (filtered by board).
 //   - `POST /cards` validates that the referenced board exists (404 if not).
 
+require('dotenv').config()
+
 const express = require('express')
 const cors = require('cors')
 const { PrismaClient } = require('@prisma/client')
