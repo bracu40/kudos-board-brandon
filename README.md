@@ -2,7 +2,7 @@
 
 Submitted by: **Prateek Oblumpally, Charles Mada, Brandon Curo**
 
-Deployed Application (optional): [Kudos Board Deployed Site](ADD_LINK_HERE)
+Deployed Application (optional): [Kudos Board Deployed Site](https://kudos-board-1-4v6y.onrender.com/)
 
 ### Application Features
 
@@ -85,7 +85,7 @@ Deployed Application (optional): [Kudos Board Deployed Site](ADD_LINK_HERE)
 
 - [x] **Deployment**
   - [x] Website is deployed via Render.
-- [ ] **Comments**
+- [x] **Comments**
   - [x] Users can add comments to cards.
   - [x] To successfully add a comment, users must specify a text message body.
   - [x] Users are given the option to specify the author of the comment.
@@ -96,7 +96,7 @@ Deployed Application (optional): [Kudos Board Deployed Site](ADD_LINK_HERE)
     - [x] A list of the card's comments and each comment's:
       - [x] Message body
       - [x] Author (if specified)
-  - [ ] Users can add multiple comments to a single card.
+  - [x] Users can add multiple comments to a single card.
 - [x] **Dark Mode** 
   - [x] Users can toggle between light mode and dark mode using a button displayed on the:
     - [x] Home Page
@@ -112,7 +112,7 @@ Deployed Application (optional): [Kudos Board Deployed Site](ADD_LINK_HERE)
     - [ ] Color contrast has at least a 4.5:1 ratio using this [color contrast checker](https://webaim.org/resources/contrastchecker/)
   - [x] The chosen mode (light or dark) persists when navigating from home page to board pages and vice versa.
   - [x] When the user first visits the site the theme defaults to light mode.
-  - [ ] **VIDEO WALKTHROUGH SPECIAL INSTRUCTIONS**: To ease the grading process, please use the [color contrast checker](https://webaim.org/resources/contrastchecker/) to demonstrate to the grading team that text and background colors on your website have appropriate contrast in both light and dark mode. The Contrast Ratio should be above 4.5:1 and should have a green box surrounding it. 
+  - [x] **VIDEO WALKTHROUGH SPECIAL INSTRUCTIONS**: To ease the grading process, please use the [color contrast checker](https://webaim.org/resources/contrastchecker/) to demonstrate to the grading team that text and background colors on your website have appropriate contrast in both light and dark mode. The Contrast Ratio should be above 4.5:1 and should have a green box surrounding it. 
 - [x] **Pinned Cards**
   - [x] Users can pin a card to the top of the board.
   - [x] A Pin button is displayed on each card.
@@ -141,22 +141,23 @@ Deployed Application (optional): [Kudos Board Deployed Site](ADD_LINK_HERE)
 
 ### Walkthrough Video
 
+`TODO://` Paste the **shareable link** to your animated app walkthrough below (replace `ADD_LOOM_LINK_HERE`). GitHub markdown won't render an embedded Loom player, so a plain link is what graders will use. Make sure the link is public and playable before submitting. Ensure your walkthrough showcases the presence and/or functionality of all features you implemented above (check them off as you film!). Pay attention to any **VIDEO WALKTHROUGH SPECIAL INSTRUCTIONS** checkboxes listed above to ensure graders see the full functionality of your website. (🚫 Remove this paragraph after adding your walkthrough link.)
 
-**Walkthrough video:** https://www.loom.com/share/90f30205282449fb9c0774d0face9a80
+**Walkthrough video:** [Kudos Board Walkthrough](https://www.loom.com/share/90f30205282449fb9c0774d0face9a80)
 
 ### Reflection
 
 * Did the topics discussed in your labs prepare you to complete the assignment? Be specific, which features in your weekly assignment did you feel unprepared to complete?
 
-Add your response here
+For the most part, yes. The labs on React state/props, component composition, `useEffect` data fetching, and building an Express + Prisma backend mapped directly onto the core features — the board grid, the board detail page, and the CRUD routes for boards and cards all followed patterns we had already practiced. The area we felt least prepared for was integrating the third-party GIPHY API into the "Add New Card" flow: debouncing the search input, handling the async response, letting the user pick a thumbnail, and building a manual paste-URL fallback for when the API key was missing all had to be figured out beyond the lab material. Splitting the work across three people (boards, cards, and integration) and then merging three separate codebases and databases into one (`charles-integration`) was also something the labs didn't cover — resolving the API contract differences (e.g. `GET /cards` becoming `GET /boards/:boardId/cards`) took extra coordination.
 
 * If you had more time, what would you have done differently? Would you have added additional features? Changed the way your project responded to a particular event, etc.
-  
-Add your response here
+
+We would have finished the two remaining stretch goals: deploying the app to Render (right now it only runs locally against `http://localhost:5000`, though the frontend already reads a `VITE_API_BASE` override so it's deploy-ready) and adding real User Accounts with login/signup so boards and cards could be tied to an owner instead of only supporting anonymous authorship. We'd also make the search bar's "Search" button and the Enter key actually trigger a submit — today filtering happens live as you type, so the button is currently decorative — and we'd formally verify the light/dark color contrast meets the 4.5:1 ratio. On the polish side, we'd like to make dark mode default to light on first visit (it currently follows the user's OS preference) and add optimistic UI updates so upvotes and pins feel instant even on a slow connection.
 
 * Reflect on your project demo, what went well? Were there things that maybe didn't go as planned? Did you notice something that your peer did that you would like to try next time?
 
-Add your response here
+The core flow demoed smoothly: creating a board, opening it, searching GIPHY to add a card, upvoting, pinning cards to the top, and adding comments in the modal all worked end to end, and the analytics/trending dashboard was a nice bonus that showed off the data we were collecting. What was trickiest was the integration step — merging three independent projects meant reconciling different database schemas and API shapes, and we had to be careful that pinned-card ordering and comment counts survived a page refresh (they're persisted server-side, so they did). Watching peers, we liked how some teams used optimistic updates and toast notifications for instant feedback, and how cleanly they separated pure logic into testable utility functions — something we started doing with `filterBoards.js` and would lean into more next time.
 
 ### Open-source libraries used
 
