@@ -83,19 +83,19 @@ Deployed Application (optional): [Kudos Board Deployed Site](ADD_LINK_HERE)
 
 ####  Stretch Features
 
-- [ ] **Deployment**
-  - [ ] Website is deployed via Render.
+- [x] **Deployment**
+  - [x] Website is deployed via Render.
 - [ ] **Comments**
-  - [ ] Users can add comments to cards.
-  - [ ] To successfully add a comment, users must specify a text message body.
-  - [ ] Users are given the option to specify the author of the comment.
-  - [ ] Users can view comments on card in a pop-up modal that displays the card's:
-    - [ ] Text message 
-    - [ ] Gif
-    - [ ] Author (if specified)
-    - [ ] A list of the card's comments and each comment's:
-      - [ ] Message body
-      - [ ] Author (if specified)
+  - [x] Users can add comments to cards.
+  - [x] To successfully add a comment, users must specify a text message body.
+  - [x] Users are given the option to specify the author of the comment.
+  - [x] Users can view comments on card in a pop-up modal that displays the card's:
+    - [x] Text message 
+    - [x] Gif
+    - [x] Author (if specified)
+    - [x] A list of the card's comments and each comment's:
+      - [x] Message body
+      - [x] Author (if specified)
   - [ ] Users can add multiple comments to a single card.
 - [x] **Dark Mode** 
   - [x] Users can toggle between light mode and dark mode using a button displayed on the:
@@ -113,23 +113,23 @@ Deployed Application (optional): [Kudos Board Deployed Site](ADD_LINK_HERE)
   - [x] The chosen mode (light or dark) persists when navigating from home page to board pages and vice versa.
   - [x] When the user first visits the site the theme defaults to light mode.
   - [ ] **VIDEO WALKTHROUGH SPECIAL INSTRUCTIONS**: To ease the grading process, please use the [color contrast checker](https://webaim.org/resources/contrastchecker/) to demonstrate to the grading team that text and background colors on your website have appropriate contrast in both light and dark mode. The Contrast Ratio should be above 4.5:1 and should have a green box surrounding it. 
-- [ ] **Pinned Cards**
-  - [ ] Users can pin a card to the top of the board.
-  - [ ] A Pin button is displayed on each card.
-  - [ ] When the user clicks the Pin button of an unpinned card:
-    - [ ] The card moves to the top of the grid view for that board.
-    - [ ] There is some visual feedback to indicate a card's pin status (e.g., a pin icon, a border highlight).
-    - [ ] The pin action is saved so that the card remains pinned after page refreshes.
-  - [ ] When the user clicks the Pin button of a pinned card:
-    - [ ] The card returns to its original position in the grid based on its creation time or to the end of the grid.
-    - [ ] The card's pin status (e.g., a pin icon or highlight)  is removed.
-    - [ ] The unpin action is saved so that the card remains unpinned after page refresh.
-  - [ ] Pinned cards always appear at the top of the board, above unpinned cards.
-  - [ ] If multiple cards are pinned, they maintain their pinned order based on the time they were pinned.
-    - [ ] More recent pins should appear first.
-- [ ] The pinned state of a card persists when:
-  - [ ] navigating away from and back to the board.
-  - [ ] refreshing the page. 
+- [x] **Pinned Cards**
+  - [x] Users can pin a card to the top of the board.
+  - [x] A Pin button is displayed on each card.
+  - [x] When the user clicks the Pin button of an unpinned card:
+    - [x] The card moves to the top of the grid view for that board.
+    - [x] There is some visual feedback to indicate a card's pin status (e.g., a pin icon, a border highlight).
+    - [x] The pin action is saved so that the card remains pinned after page refreshes.
+  - [x] When the user clicks the Pin button of a pinned card:
+    - [x] The card returns to its original position in the grid based on its creation time or to the end of the grid.
+    - [x] The card's pin status (e.g., a pin icon or highlight)  is removed.
+    - [x] The unpin action is saved so that the card remains unpinned after page refresh.
+  - [x] Pinned cards always appear at the top of the board, above unpinned cards.
+  - [x] If multiple cards are pinned, they maintain their pinned order based on the time they were pinned.
+    - [x] More recent pins should appear first.
+- [x] The pinned state of a card persists when:
+  - [x] navigating away from and back to the board.
+  - [x] refreshing the page. 
 - [ ] **User Accounts**
   - [ ] Users should be able to log in with a username and password.
   - [ ] Users should be able to sign up for a new account.
@@ -141,9 +141,8 @@ Deployed Application (optional): [Kudos Board Deployed Site](ADD_LINK_HERE)
 
 ### Walkthrough Video
 
-`TODO://` Paste the **shareable link** to your animated app walkthrough below (replace `ADD_LOOM_LINK_HERE`). GitHub markdown won't render an embedded Loom player, so a plain link is what graders will use. Make sure the link is public and playable before submitting. Ensure your walkthrough showcases the presence and/or functionality of all features you implemented above (check them off as you film!). Pay attention to any **VIDEO WALKTHROUGH SPECIAL INSTRUCTIONS** checkboxes listed above to ensure graders see the full functionality of your website. (🚫 Remove this paragraph after adding your walkthrough link.)
 
-**Walkthrough video:** [Kudos Board Walkthrough](ADD_LOOM_LINK_HERE)
+**Walkthrough video:** https://www.loom.com/share/90f30205282449fb9c0774d0face9a80
 
 ### Reflection
 
