@@ -44,7 +44,22 @@ export const createCard = (data) =>
   })
 export const upvoteCard = (id) =>
   request(`/cards/${id}/upvote`, { method: 'PATCH' })
+export const pinCard = (id, isPinned) =>
+  request(`/cards/${id}/pin`, {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ isPinned }),
+  })
 export const deleteCard = (id) => request(`/cards/${id}`, { method: 'DELETE' })
+
+// --- Comments ---
+export const getComments = (cardId) => request(`/cards/${cardId}/comments`)
+export const createComment = (cardId, data) =>
+  request(`/cards/${cardId}/comments`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data),
+  })
 
 // --- GIPHY ---
 // Search GIPHY and return a normalized list: { id, url, previewUrl, title }.

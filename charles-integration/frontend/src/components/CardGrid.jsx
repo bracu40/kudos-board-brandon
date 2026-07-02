@@ -1,7 +1,17 @@
 import CardTile from './CardTile'
 
-// Props: cards, onCardDeleted(id), onCardUpvoted(id), upvotingId, deletingId
-function CardGrid({ cards, onCardDeleted, onCardUpvoted, upvotingId, deletingId }) {
+// Props: cards, onCardDeleted(id), onCardUpvoted(id), onCardPinned(id, isPinned),
+//        onOpenComments(card), upvotingId, deletingId, pinningId
+function CardGrid({
+  cards,
+  onCardDeleted,
+  onCardUpvoted,
+  onCardPinned,
+  onOpenComments,
+  upvotingId,
+  deletingId,
+  pinningId,
+}) {
   if (cards.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center gap-3 py-20 text-center">
@@ -20,8 +30,11 @@ function CardGrid({ cards, onCardDeleted, onCardUpvoted, upvotingId, deletingId 
           card={card}
           onUpvote={onCardUpvoted}
           onDelete={onCardDeleted}
+          onPin={onCardPinned}
+          onOpenComments={onOpenComments}
           isUpvoting={upvotingId === card.id}
           isDeleting={deletingId === card.id}
+          isPinning={pinningId === card.id}
         />
       ))}
     </div>

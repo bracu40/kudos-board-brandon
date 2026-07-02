@@ -89,9 +89,16 @@ app.get('/boards/:boardId/cards', async (req, res) => {
     if (!board) {
       return res.status(404).json({ error: 'Board not found' })
     }
+    // Pinned cards first (most-recent pin first), then the rest by creation time.
+    // Include comment ids so the UI can show a per-card comment count.
     const cards = await prisma.card.findMany({
       where: { boardId },
-      orderBy: { createdAt: 'desc' },
+      orderBy: [
+        { isPinned: 'desc' },
+        { pinnedAt: 'desc' },
+        { createdAt: 'desc' },
+      ],
+      include: { comments: { select: { id: true } } },
     })
     res.status(200).json({ cards })
   } catch (err) {
@@ -149,6 +156,85 @@ app.patch('/cards/:id/upvote', async (req, res) => {
     }
     console.error('PATCH /cards/:id/upvote', err)
     res.status(500).json({ error: 'Failed to upvote card' })
+  }
+})
+
+// PATCH /cards/:id/pin — toggle pinned state. Body: { isPinned: boolean }.
+// Sets pinnedAt to now when pinning (drives most-recent-pin-first ordering),
+// clears it when unpinning.
+app.patch('/cards/:id/pin', async (req, res) => {
+  const id = Number(req.params.id)
+  if (Number.isNaN(id)) {
+    return res.status(400).json({ error: 'Invalid card id' })
+  }
+  const { isPinned } = req.body
+  if (typeof isPinned !== 'boolean') {
+    return res.status(400).json({ error: 'isPinned (boolean) is required' })
+  }
+
+  try {
+    const card = await prisma.card.update({
+      where: { id },
+      data: { isPinned, pinnedAt: isPinned ? new Date() : null },
+    })
+    res.status(200).json({ card })
+  } catch (err) {
+    if (err.code === 'P2025') {
+      return res.status(404).json({ error: 'Card not found' })
+    }
+    console.error('PATCH /cards/:id/pin', err)
+    res.status(500).json({ error: 'Failed to pin card' })
+  }
+})
+
+// --- Comments -----------------------------------------------------------------
+
+// GET /cards/:cardId/comments — comments for a card (oldest first).
+app.get('/cards/:cardId/comments', async (req, res) => {
+  const cardId = Number(req.params.cardId)
+  if (Number.isNaN(cardId)) {
+    return res.status(400).json({ error: 'Invalid card id' })
+  }
+
+  try {
+    const card = await prisma.card.findUnique({ where: { id: cardId } })
+    if (!card) {
+      return res.status(404).json({ error: 'Card not found' })
+    }
+    const comments = await prisma.comment.findMany({
+      where: { cardId },
+      orderBy: { createdAt: 'asc' },
+    })
+    res.status(200).json({ comments })
+  } catch (err) {
+    console.error('GET /cards/:cardId/comments', err)
+    res.status(500).json({ error: 'Failed to fetch comments' })
+  }
+})
+
+// POST /cards/:cardId/comments — message required; author optional (guests ok).
+app.post('/cards/:cardId/comments', async (req, res) => {
+  const cardId = Number(req.params.cardId)
+  if (Number.isNaN(cardId)) {
+    return res.status(400).json({ error: 'Invalid card id' })
+  }
+  const { message, author } = req.body
+  if (!message || !message.trim()) {
+    return res.status(400).json({ error: 'Missing required field: message is required' })
+  }
+
+  try {
+    const card = await prisma.card.findUnique({ where: { id: cardId } })
+    if (!card) {
+      return res.status(404).json({ error: 'Card not found' })
+    }
+    const comment = await prisma.comment.create({
+      data: { cardId, message: message.trim(), author: author?.trim() || null },
+    })
+    res.status(201).json({ comment })
+  } catch (err) {
+    console.error('POST /cards/:cardId/comments', err)
+    res.status(500).json({ error: 'Failed to create comment' })
   }
 })
 

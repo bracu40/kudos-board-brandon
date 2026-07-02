@@ -5,8 +5,22 @@ import Header from './Header'
 import Footer from './Footer'
 import CreateCardForm from './CreateCardForm'
 import CardGrid from './CardGrid'
-import { getBoards, getCards, upvoteCard, deleteCard } from '../api'
+import CommentModal from './CommentModal'
+import { getBoards, getCards, upvoteCard, deleteCard, pinCard } from '../api'
 import { CATEGORY_LABELS, CATEGORY_STYLE } from '../categories'
+
+// Pinned cards first (most-recent pin first), then the rest by creation time.
+// Mirrors the backend ordering so the grid stays consistent after a client-side
+// pin toggle without needing a refetch.
+function sortCards(cards) {
+  return [...cards].sort((a, b) => {
+    if (a.isPinned !== b.isPinned) return a.isPinned ? -1 : 1
+    if (a.isPinned && b.isPinned) {
+      return new Date(b.pinnedAt) - new Date(a.pinnedAt)
+    }
+    return new Date(b.createdAt) - new Date(a.createdAt)
+  })
+}
 
 function BoardPage() {
   const { id } = useParams()
@@ -18,6 +32,8 @@ function BoardPage() {
   const [error, setError] = useState(null)
   const [upvotingId, setUpvotingId] = useState(null)
   const [deletingId, setDeletingId] = useState(null)
+  const [pinningId, setPinningId] = useState(null)
+  const [activeCard, setActiveCard] = useState(null)
 
   // Fetch the board (from the list) + its cards in parallel.
   useEffect(() => {
@@ -26,7 +42,7 @@ function BoardPage() {
       .then(([{ boards }, { cards }]) => {
         if (!active) return
         setBoard(boards.find((b) => b.id === boardId) || null)
-        setCards(cards)
+        setCards(sortCards(cards))
       })
       .catch((err) => active && setError(err.message))
       .finally(() => active && setIsLoading(false))
@@ -36,18 +52,34 @@ function BoardPage() {
   }, [boardId])
 
   function handleCardCreated(card) {
-    setCards((prev) => [card, ...prev])
+    setCards((prev) => sortCards([card, ...prev]))
   }
 
   async function handleCardUpvoted(cardId) {
     setUpvotingId(cardId)
     try {
       const { card } = await upvoteCard(cardId)
-      setCards((prev) => prev.map((c) => (c.id === cardId ? card : c)))
+      setCards((prev) => prev.map((c) => (c.id === cardId ? { ...c, ...card } : c)))
     } catch (err) {
       setError(err.message)
     } finally {
       setUpvotingId(null)
+    }
+  }
+
+  async function handleCardPinned(cardId, isPinned) {
+    setPinningId(cardId)
+    try {
+      const { card } = await pinCard(cardId, isPinned)
+      // Merge (keep comment count from the list) then re-sort so the card jumps
+      // to / falls back from the top immediately.
+      setCards((prev) =>
+        sortCards(prev.map((c) => (c.id === cardId ? { ...c, ...card } : c))),
+      )
+    } catch (err) {
+      setError(err.message)
+    } finally {
+      setPinningId(null)
     }
   }
 
@@ -61,6 +93,17 @@ function BoardPage() {
     } finally {
       setDeletingId(null)
     }
+  }
+
+  // Bump a card's comment count after a comment is posted from the modal.
+  function handleCommentAdded(cardId) {
+    setCards((prev) =>
+      prev.map((c) =>
+        c.id === cardId
+          ? { ...c, comments: [...(c.comments || []), { id: Date.now() }] }
+          : c,
+      ),
+    )
   }
 
   const style = board && (CATEGORY_STYLE[board.category] || { bg: '#7c3aed', text: '#fff' })
@@ -131,8 +174,11 @@ function BoardPage() {
                     cards={cards}
                     onCardUpvoted={handleCardUpvoted}
                     onCardDeleted={handleCardDeleted}
+                    onCardPinned={handleCardPinned}
+                    onOpenComments={setActiveCard}
                     upvotingId={upvotingId}
                     deletingId={deletingId}
+                    pinningId={pinningId}
                   />
                 </div>
 
@@ -146,6 +192,14 @@ function BoardPage() {
         </div>
       </main>
       <Footer />
+
+      {activeCard && (
+        <CommentModal
+          card={activeCard}
+          onClose={() => setActiveCard(null)}
+          onCommentAdded={handleCommentAdded}
+        />
+      )}
     </div>
   )
 }
