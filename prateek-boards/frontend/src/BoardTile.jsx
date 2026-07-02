@@ -20,6 +20,7 @@ function BoardTile({ board, onDelete }) {
     alert(`Clicked board: ${board.title}\n(Navigation will be added during integration)`);
   };
 
+  
   return (
     <div className="board-tile" onClick={handleClick}>
       <img

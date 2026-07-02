@@ -6,7 +6,7 @@ export const mockBoards = [
     id: 1,
     title: "Team Wins 🎉",
     category: "celebration",
-    author: "Prateek",
+    author: "J",
     imageUrl: "https://media.giphy.com/media/26u4cqiYI30juCOGY/giphy.gif",
     createdAt: "2024-01-15T10:30:00.000Z"
   },
@@ -14,7 +14,7 @@ export const mockBoards = [
     id: 2,
     title: "Thank You Notes",
     category: "thank-you",
-    author: "Alice",
+    author: "B",
     imageUrl: "https://media.giphy.com/media/3oz8xIsloV7zOmt81G/giphy.gif",
     createdAt: "2024-01-14T09:00:00.000Z"
   },

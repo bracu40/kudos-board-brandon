@@ -50,6 +50,7 @@ app.post('/boards', async (req, res) => {
   }
 });
 
+
 // DELETE /boards/:id - Delete a board
 app.delete('/boards/:id', async (req, res) => {
   try {

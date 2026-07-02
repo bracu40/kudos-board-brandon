@@ -33,8 +33,6 @@ A **standalone boards-only CRUD app** that can run independently.
 - [ ] **DELETE /boards/:id** — delete board by id
 - [ ] Test all 3 routes in Postman
 - [ ] Seed 3-4 test boards manually for testing
-
-### Day 3 (Friday) — Frontend Components
 - [ ] `cd frontend && npx create-react-app .` (port 3000)
 - [ ] Build `BoardGrid.jsx` — displays boards in grid
 - [ ] Build `BoardTile.jsx` — shows imageUrl, title, delete button, clickable
@@ -46,8 +44,6 @@ A **standalone boards-only CRUD app** that can run independently.
   - Submit button
 - [ ] Use **mock data** (hardcoded array of boards)
 - [ ] Make sure UI looks right
-
-### Day 4 (Saturday) — Connect & Test
 - [ ] Replace mock data with `fetch('http://localhost:5000/boards')`
 - [ ] Wire up create form → `POST http://localhost:5000/boards`
 - [ ] Wire up delete button → `DELETE http://localhost:5000/boards/:id`
