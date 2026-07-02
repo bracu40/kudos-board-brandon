@@ -1,5 +1,8 @@
 // Central API config + tiny fetch helpers for the integrated backend.
-export const API_BASE = 'http://localhost:5000'
+// Set VITE_API_BASE to the deployed backend URL in production; falls back to
+// localhost for local dev. Vite inlines this at build time, so rebuild after
+// changing it on the host.
+export const API_BASE = import.meta.env.VITE_API_BASE || 'http://localhost:5000'
 
 // GIPHY: read the key from Vite env (set VITE_GIPHY_API_KEY in .env.local).
 // Falls back to the public beta key for local dev.
