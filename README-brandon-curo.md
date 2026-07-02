@@ -1,6 +1,6 @@
 ## Unit Assignment: Kudos Board
 
-Submitted by: **Prateek Oblumpally, Charles Mada, Brandon Curo**
+Submitted by: **Brandon Curo**
 
 Deployed Application (optional): [Kudos Board Deployed Site](ADD_LINK_HERE)
 
