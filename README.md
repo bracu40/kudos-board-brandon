@@ -153,11 +153,11 @@ For the most part, yes. The labs on React state/props, component composition, `u
 
 * If you had more time, what would you have done differently? Would you have added additional features? Changed the way your project responded to a particular event, etc.
 
-We would have finished the two remaining stretch goals: deploying the app to Render (right now it only runs locally against `http://localhost:5000`, though the frontend already reads a `VITE_API_BASE` override so it's deploy-ready) and adding real User Accounts with login/signup so boards and cards could be tied to an owner instead of only supporting anonymous authorship. We'd also make the search bar's "Search" button and the Enter key actually trigger a submit — today filtering happens live as you type, so the button is currently decorative — and we'd formally verify the light/dark color contrast meets the 4.5:1 ratio. On the polish side, we'd like to make dark mode default to light on first visit (it currently follows the user's OS preference) and add optimistic UI updates so upvotes and pins feel instant even on a slow connection.
+We would have finished the remaining stretch goals: adding real User Accounts with login/signup so boards and cards could be tied to an owner instead of only supporting anonymous authorship.
 
 * Reflect on your project demo, what went well? Were there things that maybe didn't go as planned? Did you notice something that your peer did that you would like to try next time?
 
-The core flow demoed smoothly: creating a board, opening it, searching GIPHY to add a card, upvoting, pinning cards to the top, and adding comments in the modal all worked end to end, and the analytics/trending dashboard was a nice bonus that showed off the data we were collecting. What was trickiest was the integration step — merging three independent projects meant reconciling different database schemas and API shapes, and we had to be careful that pinned-card ordering and comment counts survived a page refresh (they're persisted server-side, so they did). Watching peers, we liked how some teams used optimistic updates and toast notifications for instant feedback, and how cleanly they separated pure logic into testable utility functions — something we started doing with `filterBoards.js` and would lean into more next time.
+The demo went smoothly. Creating a board, opening it, searching GIPHY to add a card, upvoting, pinning cards to the top, and adding comments in the modal all worked end to end, and the analytics/trending dashboard was a nice bonus that showed off the data we were collecting. What was trickiest was the integration step. Merging three independent projects meant reconciling different database schemas and API shapes, and we had to be careful that pinned-card ordering and comment counts survived a page refresh.
 
 ### Open-source libraries used
 
@@ -165,4 +165,4 @@ The core flow demoed smoothly: creating a board, opening it, searching GIPHY to 
 
 ### Shout out
 
-Give a shout out to somebody from your cohort that especially helped you during your project. This can be a fellow peer, instructor, TA, mentor, etc.
+Shoutout Heartwill for helping with Render deployment.
